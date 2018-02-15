@@ -1,0 +1,14 @@
+#This for a weekly cronjob that will:
+#1. execute a mysqldump
+#2. move it to another directory
+#3. tarball it and then move it again to another directory
+#Run a weekly backup every Sunday at 0400
+0 4 * * 1 mysqldump -u <username> -p<pass> <database> > dump-file.sql
+
+#Move the dump file to the specified directory...
+# on at 0405 every Sunday
+5 4 * * 1 sudo mv dump-file.sql /specified/path/
+
+#Tarball the dumpfile and move it to th specified directory...
+#at 0406 every Sunday
+6 4 * * 1 sudo tar -czf /path/to/file-name.tar.gz /path/of/dump-file.sql
